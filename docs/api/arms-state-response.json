@@ -1,0 +1,114 @@
+{
+  "status": "ok",
+  "info": {
+    "timing": {
+      "executing": 0,
+      "unit": "ms"
+    },
+    "resultCoverage": "total",
+    "total": {
+      "recordCount": 16
+    }
+  },
+  "message": null,
+  "data": [
+    {
+      "id": "00",
+      "code": "all",
+      "name": "All survey states",
+      "terms": null
+    },
+    {
+      "id": "05",
+      "code": "ar",
+      "name": "Arkansas",
+      "terms": null
+    },
+    {
+      "id": "06",
+      "code": "ca",
+      "name": "California",
+      "terms": null
+    },
+    {
+      "id": "12",
+      "code": "fl",
+      "name": "Florida",
+      "terms": null
+    },
+    {
+      "id": "13",
+      "code": "ga",
+      "name": "Georgia",
+      "terms": null
+    },
+    {
+      "id": "17",
+      "code": "il",
+      "name": "Illinois",
+      "terms": null
+    },
+    {
+      "id": "18",
+      "code": "in",
+      "name": "Indiana",
+      "terms": null
+    },
+    {
+      "id": "19",
+      "code": "ia",
+      "name": "Iowa",
+      "terms": null
+    },
+    {
+      "id": "20",
+      "code": "ks",
+      "name": "Kansas",
+      "terms": null
+    },
+    {
+      "id": "27",
+      "code": "mn",
+      "name": "Minnesota",
+      "terms": null
+    },
+    {
+      "id": "29",
+      "code": "mo",
+      "name": "Missouri",
+      "terms": null
+    },
+    {
+      "id": "31",
+      "code": "ni",
+      "name": "Nebraska",
+      "terms": null
+    },
+    {
+      "id": "37",
+      "code": "nc",
+      "name": "North Carolina",
+      "terms": null
+    },
+    {
+      "id": "48",
+      "code": "tx",
+      "name": "Texas",
+      "terms": null
+    },
+    {
+      "id": "53",
+      "code": "wa",
+      "name": "Washington",
+      "terms": null
+    },
+    {
+      "id": "55",
+      "code": "wi",
+      "name": "Wisconsin",
+      "terms": null
+    }
+  ],
+  "detail": null,
+  "errors": null
+}

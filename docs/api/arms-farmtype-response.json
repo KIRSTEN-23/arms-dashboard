@@ -1,0 +1,54 @@
+{
+  "status": "ok",
+  "info": {
+    "timing": {
+      "executing": 0,
+      "unit": "ms"
+    },
+    "resultCoverage": "total",
+    "total": {
+      "recordCount": 3
+    }
+  },
+  "message": null,
+  "data": [
+    {
+      "num": 1,
+      "header": "All Farms",
+      "description": null,
+      "invalid": false,
+      "survey_Abb": "finance",
+      "survey_Dim": {
+        "abb": "finance",
+        "header": "Farm finances"
+      },
+      "terms": "1 All Farms"
+    },
+    {
+      "num": 2,
+      "header": "Farm Businesses",
+      "description": null,
+      "invalid": false,
+      "survey_Abb": "finance",
+      "survey_Dim": {
+        "abb": "finance",
+        "header": "Farm finances"
+      },
+      "terms": "2 Farm Businesses"
+    },
+    {
+      "num": 3,
+      "header": "Farm Operator Households",
+      "description": null,
+      "invalid": false,
+      "survey_Abb": "finance",
+      "survey_Dim": {
+        "abb": "finance",
+        "header": "Farm finances"
+      },
+      "terms": "3 Farm Operator Households"
+    }
+  ],
+  "detail": null,
+  "errors": null
+}

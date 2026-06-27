@@ -1,0 +1,723 @@
+{
+  "status": "ok",
+  "info": {
+    "timing": {
+      "executing": 0,
+      "unit": "ms"
+    },
+    "resultCoverage": "total",
+    "total": {
+      "recordCount": 9
+    }
+  },
+  "message": null,
+  "data": [
+    {
+      "abb": "farm",
+      "header": "All Farms",
+      "desc": null,
+      "seq": 1,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": false,
+          "name": "TOTAL",
+          "desc": null,
+          "serie_Abb": "farm",
+          "terms": "0 TOTAL"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "NA",
+          "desc": null,
+          "serie_Abb": "farm",
+          "terms": "1 NA"
+        }
+      ],
+      "terms": "FARM All Farms"
+    },
+    {
+      "abb": "grp",
+      "header": "Collapsed Farm Typology",
+      "desc": "Data shown are classified into one of three exclusive categories (typologies) of farms. The typology is based on the occupation of the principal operator and the gross cash farm income of the farming operation.",
+      "seq": 2,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": true,
+          "name": "All Collapsed Typologies",
+          "desc": null,
+          "serie_Abb": "grp",
+          "terms": "0 All Collapsed Typologies"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "Residence farms",
+          "desc": null,
+          "serie_Abb": "grp",
+          "terms": "1 Residence farms"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "Intermediate farms",
+          "desc": null,
+          "serie_Abb": "grp",
+          "terms": "2 Intermediate farms"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "Commercial farms",
+          "desc": null,
+          "serie_Abb": "grp",
+          "terms": "3 Commercial farms"
+        }
+      ],
+      "terms": "GRP Collapsed Farm Typology"
+    },
+    {
+      "abb": "sal",
+      "header": "Economic Class",
+      "desc": "Data shown are classified into one of five exclusive categories of farm sales. Farm sales include livestock and crop income from cash and marketing contract sales, fees received from livestock and crop production contracts, the net change in CCC loans, and government payments.",
+      "seq": 3,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": true,
+          "name": "All Sales Classes",
+          "desc": null,
+          "serie_Abb": "sal",
+          "terms": "0 All Sales Classes"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "$1,000,000 or more",
+          "desc": null,
+          "serie_Abb": "sal",
+          "terms": "1 $1,000,000 or more"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "$500,000 to $999,999",
+          "desc": null,
+          "serie_Abb": "sal",
+          "terms": "2 $500,000 to $999,999"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "$250,000 to $499,999",
+          "desc": null,
+          "serie_Abb": "sal",
+          "terms": "3 $250,000 to $499,999"
+        },
+        {
+          "id": 4,
+          "invalid": false,
+          "name": "$100,000 to $249,999",
+          "desc": null,
+          "serie_Abb": "sal",
+          "terms": "4 $100,000 to $249,999"
+        },
+        {
+          "id": 5,
+          "invalid": false,
+          "name": "Less than $100,000",
+          "desc": null,
+          "serie_Abb": "sal",
+          "terms": "5 Less than $100,000"
+        }
+      ],
+      "terms": "SAL Economic Class"
+    },
+    {
+      "abb": "ftypll",
+      "header": "Farm Typology",
+      "desc": "Data shown are classified into one of seven exclusive categories (typologies) of farms. The typology is based on gross farm sales, the primary occupation of the operators, and whether the farms are family farms. Beginning in 2011 the versions of the typology are based on gross cash farm income rather than gross sales, and the dollar brackets for the categories were raised as well.",
+      "seq": 4,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": true,
+          "name": "All Typologies",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "0 All Typologies"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "Retirement farms (1996 through 2010)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "1 Retirement farms (1996 through 2010)"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "Residential/lifestyle farms (1996 through 2010)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "2 Residential/lifestyle farms (1996 through 2010)"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "Farming occupation/lower-sales farms (1996 through 2010)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "3 Farming occupation/lower-sales farms (1996 through 2010)"
+        },
+        {
+          "id": 4,
+          "invalid": false,
+          "name": "Farming occupation/moderate-sales farms (1996 through 2010)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "4 Farming occupation/moderate-sales farms (1996 through 2010)"
+        },
+        {
+          "id": 5,
+          "invalid": false,
+          "name": "Large farms  (1996 through 2010)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "5 Large farms  (1996 through 2010)"
+        },
+        {
+          "id": 6,
+          "invalid": false,
+          "name": "Very large farms  (1996 through 2010)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "6 Very large farms  (1996 through 2010)"
+        },
+        {
+          "id": 7,
+          "invalid": false,
+          "name": "Nonfamily farms  (1996 through 2010)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "7 Nonfamily farms  (1996 through 2010)"
+        },
+        {
+          "id": 11,
+          "invalid": false,
+          "name": "Retirement farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "11 Retirement farms (2011 to present)"
+        },
+        {
+          "id": 12,
+          "invalid": false,
+          "name": "Off-farm occupation farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "12 Off-farm occupation farms (2011 to present)"
+        },
+        {
+          "id": 13,
+          "invalid": false,
+          "name": "Farming occupation/lower-sales farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "13 Farming occupation/lower-sales farms (2011 to present)"
+        },
+        {
+          "id": 14,
+          "invalid": false,
+          "name": "Farming occupation/moderate-sales farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "14 Farming occupation/moderate-sales farms (2011 to present)"
+        },
+        {
+          "id": 15,
+          "invalid": false,
+          "name": "Midsize farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "15 Midsize farms (2011 to present)"
+        },
+        {
+          "id": 16,
+          "invalid": false,
+          "name": "Large farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "16 Large farms (2011 to present)"
+        },
+        {
+          "id": 17,
+          "invalid": false,
+          "name": "Very large farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "17 Very large farms (2011 to present)"
+        },
+        {
+          "id": 18,
+          "invalid": false,
+          "name": "Nonfamily farms (2011 to present)",
+          "desc": null,
+          "serie_Abb": "ftypll",
+          "terms": "18 Nonfamily farms (2011 to present)"
+        }
+      ],
+      "terms": "FTYPLL Farm Typology"
+    },
+    {
+      "abb": "age",
+      "header": "Operator Age",
+      "desc": "Data shown are classified into one of five exclusive categories based on the age of the farm's principal operator.",
+      "seq": 5,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": true,
+          "name": "All Operators",
+          "desc": null,
+          "serie_Abb": "age",
+          "terms": "0 All Operators"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "34 years or younger",
+          "desc": null,
+          "serie_Abb": "age",
+          "terms": "1 34 years or younger"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "35 to 44 years old",
+          "desc": null,
+          "serie_Abb": "age",
+          "terms": "2 35 to 44 years old"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "45 to 54 years old",
+          "desc": null,
+          "serie_Abb": "age",
+          "terms": "3 45 to 54 years old"
+        },
+        {
+          "id": 4,
+          "invalid": false,
+          "name": "55 to 64 years old",
+          "desc": null,
+          "serie_Abb": "age",
+          "terms": "4 55 to 64 years old"
+        },
+        {
+          "id": 5,
+          "invalid": false,
+          "name": "65 years or older",
+          "desc": null,
+          "serie_Abb": "age",
+          "terms": "5 65 years or older"
+        }
+      ],
+      "terms": "AGE Operator Age"
+    },
+    {
+      "abb": "nreg",
+      "header": "Farm Production Region",
+      "desc": null,
+      "seq": 6,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": true,
+          "name": "Undefined element",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "0 Undefined element"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "Pacific",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "1 Pacific"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "Mountain",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "2 Mountain"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "Northern Plains",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "3 Northern Plains"
+        },
+        {
+          "id": 4,
+          "invalid": false,
+          "name": "Southern Plains",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "4 Southern Plains"
+        },
+        {
+          "id": 5,
+          "invalid": false,
+          "name": "Lake States",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "5 Lake States"
+        },
+        {
+          "id": 6,
+          "invalid": false,
+          "name": "Corn Belt",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "6 Corn Belt"
+        },
+        {
+          "id": 7,
+          "invalid": false,
+          "name": "Delta",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "7 Delta"
+        },
+        {
+          "id": 8,
+          "invalid": false,
+          "name": "Northeast",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "8 Northeast"
+        },
+        {
+          "id": 9,
+          "invalid": false,
+          "name": "Appalachian",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "9 Appalachian"
+        },
+        {
+          "id": 10,
+          "invalid": false,
+          "name": "Southeast",
+          "desc": null,
+          "serie_Abb": "nreg",
+          "terms": "10 Southeast"
+        }
+      ],
+      "terms": "NREG Farm Production Region"
+    },
+    {
+      "abb": "reg",
+      "header": "Farm Resource Region",
+      "desc": "Data shown classifies the contiguous U.S. in nine exlusive regions in terms of geographic specialization in production of U.S. farm commodities - see https://www.ers.usda.gov/publications/pub-details/?pubid=42299.",
+      "seq": 7,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": true,
+          "name": "All ERS Regions",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "0 All ERS Regions"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "Heartland",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "1 Heartland"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "Northern Crescent",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "2 Northern Crescent"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "Northern Great Plains",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "3 Northern Great Plains"
+        },
+        {
+          "id": 4,
+          "invalid": false,
+          "name": "Prairie Gateway",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "4 Prairie Gateway"
+        },
+        {
+          "id": 5,
+          "invalid": false,
+          "name": "Eastern Uplands",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "5 Eastern Uplands"
+        },
+        {
+          "id": 6,
+          "invalid": false,
+          "name": "Southern Seaboard",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "6 Southern Seaboard"
+        },
+        {
+          "id": 7,
+          "invalid": false,
+          "name": "Fruitful Rim",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "7 Fruitful Rim"
+        },
+        {
+          "id": 8,
+          "invalid": false,
+          "name": "Basin and Range",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "8 Basin and Range"
+        },
+        {
+          "id": 9,
+          "invalid": false,
+          "name": "Mississippi Portal",
+          "desc": null,
+          "serie_Abb": "reg",
+          "terms": "9 Mississippi Portal"
+        }
+      ],
+      "terms": "REG Farm Resource Region"
+    },
+    {
+      "abb": "n5reg",
+      "header": "NASS Region",
+      "desc": "Data shown classify the contiguous U.S. into 5 exclusive regions of adjoining States",
+      "seq": 8,
+      "element_Dim": [
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "Atlantic region",
+          "desc": null,
+          "serie_Abb": "n5reg",
+          "terms": "1 Atlantic region"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "South region",
+          "desc": null,
+          "serie_Abb": "n5reg",
+          "terms": "2 South region"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "Midwest region",
+          "desc": null,
+          "serie_Abb": "n5reg",
+          "terms": "3 Midwest region"
+        },
+        {
+          "id": 4,
+          "invalid": false,
+          "name": "Plains region",
+          "desc": null,
+          "serie_Abb": "n5reg",
+          "terms": "4 Plains region"
+        },
+        {
+          "id": 5,
+          "invalid": false,
+          "name": "West region",
+          "desc": null,
+          "serie_Abb": "n5reg",
+          "terms": "5 West region"
+        }
+      ],
+      "terms": "N5REG NASS Region"
+    },
+    {
+      "abb": "spec",
+      "header": "Production Specialty",
+      "desc": "Data shown classify farms based on majority of the value of production",
+      "seq": 9,
+      "element_Dim": [
+        {
+          "id": 0,
+          "invalid": true,
+          "name": "All Specialties",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "0 All Specialties"
+        },
+        {
+          "id": 1,
+          "invalid": false,
+          "name": "General Cash Grains",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "1 General Cash Grains"
+        },
+        {
+          "id": 2,
+          "invalid": false,
+          "name": "Wheat",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "2 Wheat"
+        },
+        {
+          "id": 3,
+          "invalid": false,
+          "name": "Corn",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "3 Corn"
+        },
+        {
+          "id": 4,
+          "invalid": false,
+          "name": "Soybean",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "4 Soybean"
+        },
+        {
+          "id": 5,
+          "invalid": false,
+          "name": "Tobacco, Cotton, Peanuts",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "5 Tobacco, Cotton, Peanuts"
+        },
+        {
+          "id": 6,
+          "invalid": false,
+          "name": "Other Field Crops",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "6 Other Field Crops"
+        },
+        {
+          "id": 7,
+          "invalid": false,
+          "name": "Specialty Crops (F,V,N)",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "7 Specialty Crops (F,V,N)"
+        },
+        {
+          "id": 8,
+          "invalid": false,
+          "name": "Cattle",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "8 Cattle"
+        },
+        {
+          "id": 9,
+          "invalid": false,
+          "name": "Hogs",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "9 Hogs"
+        },
+        {
+          "id": 10,
+          "invalid": false,
+          "name": "Poultry",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "10 Poultry"
+        },
+        {
+          "id": 11,
+          "invalid": false,
+          "name": "Dairy",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "11 Dairy"
+        },
+        {
+          "id": 12,
+          "invalid": false,
+          "name": "Hogs, Poultry, Other",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "12 Hogs, Poultry, Other"
+        },
+        {
+          "id": 13,
+          "invalid": false,
+          "name": "Fruits and Tree Nuts",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "13 Fruits and Tree Nuts"
+        },
+        {
+          "id": 14,
+          "invalid": false,
+          "name": "Vegetables",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "14 Vegetables"
+        },
+        {
+          "id": 15,
+          "invalid": false,
+          "name": "Nursery and Greenhouse",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "15 Nursery and Greenhouse"
+        },
+        {
+          "id": 16,
+          "invalid": false,
+          "name": "All Cash Grains",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "16 All Cash Grains"
+        },
+        {
+          "id": 17,
+          "invalid": false,
+          "name": "All other livestock",
+          "desc": null,
+          "serie_Abb": "spec",
+          "terms": "17 All other livestock"
+        }
+      ],
+      "terms": "SPEC Production Specialty"
+    }
+  ],
+  "detail": null,
+  "errors": null
+}

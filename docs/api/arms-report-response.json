@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "info": {
+    "timing": {
+      "executing": 0,
+      "unit": "ms"
+    },
+    "resultCoverage": "total",
+    "total": {
+      "recordCount": 8
+    }
+  },
+  "message": null,
+  "data": [
+    {
+      "num": 1,
+      "header": "Farm Business Balance Sheet",
+      "description": null,
+      "terms": "1 Farm Business Balance Sheet"
+    },
+    {
+      "num": 2,
+      "header": "Farm Business Income Statement",
+      "description": null,
+      "terms": "2 Farm Business Income Statement"
+    },
+    {
+      "num": 3,
+      "header": "Farm Business Financial Ratios",
+      "description": null,
+      "terms": "3 Farm Business Financial Ratios"
+    },
+    {
+      "num": 4,
+      "header": "Structural Characteristics",
+      "description": null,
+      "terms": "4 Structural Characteristics"
+    },
+    {
+      "num": 5,
+      "header": "Farm Business Debt Repayment Capacity",
+      "description": null,
+      "terms": "5 Farm Business Debt Repayment Capacity"
+    },
+    {
+      "num": 6,
+      "header": "Government Payments",
+      "description": null,
+      "terms": "6 Government Payments"
+    },
+    {
+      "num": 7,
+      "header": "Operator Household Income",
+      "description": null,
+      "terms": "7 Operator Household Income"
+    },
+    {
+      "num": 8,
+      "header": "Operator Household Balance Sheet",
+      "description": null,
+      "terms": "8 Operator Household Balance Sheet"
+    }
+  ],
+  "detail": null,
+  "errors": null
+}

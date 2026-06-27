@@ -1,0 +1,65 @@
+{
+  "status": "Ok",
+  "requirements": {
+    "year": {
+      "dataType": "integer",
+      "defaultValue": null,
+      "isRequired": true,
+      "allowMultiple": true
+    },
+    "state": {
+      "dataType": "string",
+      "defaultValue": "All",
+      "isRequired": false,
+      "allowMultiple": true
+    },
+    "farmType": {
+      "dataType": "string",
+      "defaultValue": "All Farms",
+      "isRequired": false,
+      "allowMultiple": true
+    },
+    "category": {
+      "dataType": "string",
+      "defaultValue": null,
+      "isRequired": false,
+      "allowMultiple": true
+    },
+    "categoryValue": {
+      "dataType": "string",
+      "defaultValue": "Total",
+      "isRequired": false,
+      "allowMultiple": true
+    },
+    "category2": {
+      "dataType": "string",
+      "defaultValue": null,
+      "isRequired": false,
+      "allowMultiple": true
+    },
+    "category2Value": {
+      "dataType": "string",
+      "defaultValue": "Total",
+      "isRequired": false,
+      "allowMultiple": true
+    },
+    "variable": {
+      "dataType": "string",
+      "defaultValue": null,
+      "isRequired": true,
+      "allowMultiple": true
+    },
+    "report": {
+      "dataType": "string",
+      "defaultValue": null,
+      "isRequired": true,
+      "allowMultiple": true
+    },
+    "subReport": {
+      "dataType": "integer",
+      "defaultValue": null,
+      "isRequired": false,
+      "allowMultiple": true
+    }
+  }
+}
