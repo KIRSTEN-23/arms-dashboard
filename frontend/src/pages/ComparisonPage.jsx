@@ -1,9 +1,10 @@
 import { useState } from "react";
+import PageHeader from "../components/common/PageHeader";
 import DomainTabs from "../components/common/DomainTabs";
 import EmptyState from "../components/common/EmptyState";
-import PageHeader from "../components/common/PageHeader";
-import CardShell from "../components/common/CardShell";
-import { SlidersHorizontal } from "lucide-react";
+import ComparisonControls from "../components/comparison/ComparisonControls";
+import ComparisonCharts from "../components/comparison/ComparisonCharts";
+import ComparisonTable from "../components/comparison/ComparisonTable";
 
 function ComparisonPage() {
   const [activeDomain, setActiveDomain] = useState("business");
@@ -12,43 +13,24 @@ function ComparisonPage() {
     <>
       <PageHeader
         title="Farm Data Comparison"
-        description="Compare selected farm business financial metrics across categories."
-        action={
-          <button type="button" className="export-button">
-            Export
-          </button>
-        }
+        description="Compare farm business financial metrics across selected farm categories."
       />
 
-      <div className="toolbar">
+      <div className="page-toolbar">
         <DomainTabs activeDomain={activeDomain} onChange={setActiveDomain} />
-
-        <button type="button" className="filter-button">
-          Select Year
-        </button>
-
-        <button type="button" className="filter-button">
-          <SlidersHorizontal size={16} />
-          Filter
-        </button>
       </div>
 
       {activeDomain === "household" ? (
         <EmptyState
           title="Household comparison coming soon"
-          message="Business comparison is available in this version. Household comparison is planned as a future feature."
+          message="This version compares farm business data. Household comparison is planned for a future release."
         />
       ) : (
-        <div className="page-grid">
-          <CardShell title="Bar Chart" className="chart-large" />
-
-          <div className="two-column-grid">
-            <CardShell title="Donut" />
-            <CardShell title="Radar / Polar" />
-          </div>
-
-          <CardShell title="Comparison Data Table" className="table-card" />
-        </div>
+        <main className="comparison-page">
+          <ComparisonControls />
+          <ComparisonCharts />
+          <ComparisonTable />
+        </main>
       )}
     </>
   );
