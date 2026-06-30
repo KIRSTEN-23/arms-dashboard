@@ -24,7 +24,12 @@ body {
   margin: 0;
   background: var(--colour-bg);
   color: var(--colour-text);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
     sans-serif;
 }
 
@@ -214,7 +219,11 @@ button {
 
 .kpi-grid .card-shell {
   min-height: 132px;
-  background: linear-gradient(135deg, var(--colour-green-800), var(--colour-green-900));
+  background: linear-gradient(
+    135deg,
+    var(--colour-green-800),
+    var(--colour-green-900)
+  );
 }
 
 .kpi-grid .card-shell h3 {
@@ -491,5 +500,60 @@ button {
 
   .comparison-chart-large {
     grid-row: auto;
+  }
+}
+
+.timeline-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.timeline-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.timeline-controls select,
+.timeline-controls button {
+  padding: 0.85rem 1rem;
+
+  border-radius: 0.85rem;
+
+  border: 1px solid #dde3da;
+
+  background: white;
+}
+
+.timeline-controls button {
+  background: #2f6532;
+  color: white;
+  border: none;
+}
+
+.timeline-chart {
+  min-height: 460px;
+
+  margin-bottom: 1.5rem;
+}
+
+.timeline-summary {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .timeline-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-summary {
+    grid-template-columns: 1fr;
   }
 }
