@@ -34,3 +34,8 @@ export async function getCategories(params = {}) {
   const response = await api.get("/arms/categories", { params });
   return response.data.data;
 }
+
+export async function getSurveyData(params = {}) {
+  const response = await api.get("/arms/surveydata", { params });
+  return response.data.data;
+}

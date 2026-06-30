@@ -6,6 +6,7 @@ const {
   getReports,
   getVariables,
   getCategories,
+  getSurveyData,
 } = require("../controllers/armsController");
 
 const router = express.Router();
@@ -16,5 +17,6 @@ router.get("/farm-types", getFarmTypes);
 router.get("/reports", getReports);
 router.get("/variables", getVariables);
 router.get("/categories", getCategories);
+router.get("/surveydata", getSurveyData);
 
 module.exports = router;

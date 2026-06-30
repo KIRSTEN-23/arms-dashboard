@@ -80,6 +80,15 @@ async function getCategories(req, res) {
   }
 }
 
+async function getSurveyData(req, res) {
+  try {
+    const data = await requestArms("/surveydata", req.query);
+    res.json(data);
+  } catch (error) {
+    handleError(error, res);
+  }
+}
+
 module.exports = {
   getStates,
   getYears,
@@ -87,4 +96,5 @@ module.exports = {
   getReports,
   getVariables,
   getCategories,
+  getSurveyData,
 };

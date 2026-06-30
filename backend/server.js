@@ -1,9 +1,16 @@
+const path = require("path");
+const dotenv = require("dotenv");
+
+dotenv.config({
+  path: path.resolve(__dirname, ".env"),
+});
+
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const armsRoutes = require("./routes/armsRoutes");
 
-dotenv.config();
+console.log("ARMS_BASE_URL:", process.env.ARMS_BASE_URL);
+console.log("ARMS_API_KEY:", process.env.ARMS_API_KEY ? "Loaded" : "Missing");
 
 const app = express();
 
