@@ -1,8 +1,97 @@
 import { useState } from "react";
+import PageHeader from "../components/common/PageHeader";
 import DomainTabs from "../components/common/DomainTabs";
 import EmptyState from "../components/common/EmptyState";
-import PageHeader from "../components/common/PageHeader";
-import CardShell from "../components/common/CardShell";
+import DashboardSummary from "../components/dashboard/DashboardSummary";
+import FarmMetricOverview from "../components/dashboard/FarmMetricOverview";
+import CategoryBreakdown from "../components/dashboard/CategoryBreakdown";
+
+const summaryMetrics = [
+  {
+    id: "income",
+    label: "Gross cash farm income",
+    value: "$238K",
+    helper: "Latest national average",
+  },
+  {
+    id: "assets",
+    label: "Farm assets",
+    value: "$1.8M",
+    helper: "Business balance sheet",
+  },
+  {
+    id: "net-income",
+    label: "Net farm income",
+    value: "$76K",
+    helper: "After expenses",
+  },
+  {
+    id: "debt-ratio",
+    label: "Debt-to-asset ratio",
+    value: "13%",
+    helper: "Financial health",
+  },
+];
+
+const incomeStatementItems = [
+  {
+    id: "revenue",
+    label: "Revenue",
+    value: "$238K",
+    note: "Gross cash farm income",
+  },
+  {
+    id: "expenses",
+    label: "Expenses",
+    value: "$162K",
+    note: "Total cash expenses",
+  },
+  {
+    id: "net-income",
+    label: "Net income",
+    value: "$76K",
+    note: "Net farm income",
+  },
+];
+
+const balanceSheetItems = [
+  {
+    id: "assets",
+    label: "Assets",
+    value: "$1.8M",
+    note: "Total farm assets",
+  },
+  {
+    id: "liabilities",
+    label: "Liabilities",
+    value: "$234K",
+    note: "Farm business debt",
+  },
+  {
+    id: "equity",
+    label: "Equity",
+    value: "$1.56M",
+    note: "Assets minus liabilities",
+  },
+];
+
+const healthItems = [
+  {
+    label: "Income strength",
+    value: "72%",
+    percentage: 72,
+  },
+  {
+    label: "Asset position",
+    value: "84%",
+    percentage: 84,
+  },
+  {
+    label: "Debt risk",
+    value: "28%",
+    percentage: 28,
+  },
+];
 
 function OverviewPage() {
   const [activeDomain, setActiveDomain] = useState("business");
@@ -10,39 +99,37 @@ function OverviewPage() {
   return (
     <>
       <PageHeader
-        title="Welcome"
-        description="National overview of U.S. farm business financial performance."
+        title="Farm Business Financial Overview"
+        description="A national snapshot of farm business performance, position and financial health."
       />
 
-      <div className="toolbar">
+      <div className="page-toolbar">
         <DomainTabs activeDomain={activeDomain} onChange={setActiveDomain} />
-
-        <button type="button" className="filter-button">
-          Select Year
-        </button>
       </div>
 
       {activeDomain === "household" ? (
         <EmptyState
           title="Household finance coming soon"
-          message="This dashboard currently focuses on farm business performance. Operator household income and balance sheet views are planned for a future version."
+          message="This version focuses on farm business performance. Operator household income and balance sheet views are planned for a future release."
         />
       ) : (
-        <div className="page-grid">
-          <div className="kpi-grid">
-            <CardShell title="Total Assets" />
-            <CardShell title="Total Liabilities" />
-            <CardShell title="Equity" />
-            <CardShell title="Debt-to-Assets Ratio" />
+        <main className="overview-page">
+          <DashboardSummary metrics={summaryMetrics} />
+
+          <div className="overview-grid">
+            <FarmMetricOverview
+              title="Income statement"
+              items={incomeStatementItems}
+            />
+
+            <FarmMetricOverview
+              title="Balance sheet"
+              items={balanceSheetItems}
+            />
           </div>
 
-          <div className="two-column-grid">
-            <CardShell title="Income Summary" />
-            <CardShell title="Expenses Summary" />
-          </div>
-
-          <CardShell title="Financial Health (Ratios)" className="wide" />
-        </div>
+          <CategoryBreakdown title="Financial health" items={healthItems} />
+        </main>
       )}
     </>
   );
