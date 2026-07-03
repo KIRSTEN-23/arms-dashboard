@@ -5,37 +5,15 @@ const api = axios.create({
   timeout: 15000,
 });
 
-export async function getStates() {
-  const response = await api.get("/arms/states");
+const fetchData = async (endpoint, params = {}) => {
+  const response = await api.get(endpoint, { params });
   return response.data.data;
-}
+};
 
-export async function getYears() {
-  const response = await api.get("/arms/years");
-  return response.data.data;
-}
-
-export async function getFarmTypes() {
-  const response = await api.get("/arms/farm-types");
-  return response.data.data;
-}
-
-export async function getReports() {
-  const response = await api.get("/arms/reports");
-  return response.data.data;
-}
-
-export async function getVariables(params = {}) {
-  const response = await api.get("/arms/variables", { params });
-  return response.data.data;
-}
-
-export async function getCategories(params = {}) {
-  const response = await api.get("/arms/categories", { params });
-  return response.data.data;
-}
-
-export async function getSurveyData(params = {}) {
-  const response = await api.get("/arms/surveydata", { params });
-  return response.data.data;
-}
+export const getStates = () => fetchData("/arms/states");
+export const getYears = () => fetchData("/arms/years");
+export const getFarmTypes = () => fetchData("/arms/farm-types");
+export const getReports = () => fetchData("/arms/reports");
+export const getVariables = (params = {}) => fetchData("/arms/variables", params);
+export const getCategories = (params = {}) => fetchData("/arms/categories", params);
+export const getSurveyData = (params = {}) => fetchData("/arms/surveydata", params);

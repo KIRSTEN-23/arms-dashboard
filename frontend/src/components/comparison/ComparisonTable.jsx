@@ -1,10 +1,4 @@
-const rows = [
-  { object: "Corn", value: "$534K", median: "$235K", reliability: "Reliable" },
-  { object: "Soybean", value: "$254K", median: "$61K", reliability: "Reliable" },
-  { object: "Dairy", value: "$1.9M", median: "$529K", reliability: "Reliable" },
-];
-
-function ComparisonTable() {
+function ComparisonTable({ rows = [] }) {
   return (
     <section className="comparison-table-card">
       <h3>Comparison table</h3>
@@ -15,17 +9,17 @@ function ComparisonTable() {
             <th>Object</th>
             <th>Mean estimate</th>
             <th>Median</th>
-            <th>Reliability</th>
+            <th>RSE</th>
           </tr>
         </thead>
 
         <tbody>
           {rows.map((row) => (
-            <tr key={row.object}>
-              <td>{row.object}</td>
-              <td>{row.value}</td>
-              <td>{row.median}</td>
-              <td>{row.reliability}</td>
+            <tr key={`${row.categoryValue}-${row.estimate}`}>
+              <td>{row.categoryValue}</td>
+              <td>${Math.round(row.estimate).toLocaleString()}</td>
+              <td>${Math.round(row.median).toLocaleString()}</td>
+              <td>{row.rse}%</td>
             </tr>
           ))}
         </tbody>
