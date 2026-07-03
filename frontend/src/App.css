@@ -458,6 +458,17 @@ button {
   margin-bottom: 1.5rem;
 }
 
+.comparison-chart-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.comparison-chart-row .chart-card,
+.comparison-chart-row .placeholder-card {
+  min-height: 360px;
+}
+
 .comparison-chart-large {
   grid-row: span 2;
   min-height: 460px;
@@ -500,6 +511,10 @@ button {
 
   .comparison-chart-large {
     grid-row: auto;
+  }
+
+  .comparison-chart-row {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -556,4 +571,126 @@ button {
   .timeline-summary {
     grid-template-columns: 1fr;
   }
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1rem 2.5rem rgba(15, 45, 23, 0.08);
+}
+
+.chart-card h3 {
+  margin: 0 0 1rem;
+  color: #0f2d17;
+}
+
+.chart-card__canvas {
+  height: 380px;
+}
+
+
+.year-control,
+.year-control select,
+.filter-section select {
+  border: 1px solid #dde3da;
+  border-radius: 0.85rem;
+  background: #ffffff;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+}
+
+.year-control--range {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.filter-button {
+  border: 0;
+  border-radius: 0.85rem;
+  background: #ffffff;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(420px, 100vw);
+  height: 100vh;
+  background: #ffffff;
+  z-index: 30;
+  box-shadow: -1rem 0 3rem rgba(15, 45, 23, 0.18);
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panel__header {
+  background: #2f6532;
+  color: #ffffff;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-panel__header h2 {
+  margin: 0;
+  flex: 1;
+}
+
+.filter-panel__header button,
+.filter-panel__clear {
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.filter-panel__clear {
+  color: #d7b84f;
+}
+
+.filter-section {
+  border-bottom: 1px solid #dde3da;
+  padding: 1.25rem;
+}
+
+.filter-section h3 {
+  margin: 0 0 1rem;
+  color: #0f2d17;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+  color: #102616;
+}
+
+.filter-panel__footer {
+  margin-top: auto;
+  border-top: 1px solid #dde3da;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.filter-panel__footer button {
+  border: 1px solid #dde3da;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+}
+
+.filter-panel__apply {
+  background: #d7b84f !important;
+  border-color: #d7b84f !important;
+  color: #ffffff;
 }
