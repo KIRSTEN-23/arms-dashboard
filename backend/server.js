@@ -9,14 +9,20 @@ const express = require("express");
 const cors = require("cors");
 const armsRoutes = require("./routes/armsRoutes");
 
-console.log("ARMS_BASE_URL:", process.env.ARMS_BASE_URL);
-console.log("ARMS_API_KEY:", process.env.ARMS_API_KEY ? "Loaded" : "Missing");
-
 const app = express();
+
+const frontendOrigins = [process.env.FRONTEND_URL].filter(Boolean);
+if (process.env.FRONTEND_URL) {
+  const localFrontend = new URL(process.env.FRONTEND_URL);
+  if (["localhost", "127.0.0.1"].includes(localFrontend.hostname)) {
+    localFrontend.hostname = localFrontend.hostname === "localhost" ? "127.0.0.1" : "localhost";
+    frontendOrigins.push(localFrontend.origin);
+  }
+}
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: frontendOrigins,
   })
 );
 
