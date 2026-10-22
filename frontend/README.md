@@ -1,16 +1,24 @@
-# React + Vite
+# ARMS Dashboard — frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+See the [project README](../README.md) for features, local setup, architecture and design documentation.
 
-Currently, two official plugins are available:
+From this folder: `npm run dev`, `npm run lint`, `npm run build`, or `npm run preview`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## GitHub Pages deployment
 
-## React Compiler
+The repository workflow builds this frontend and publishes `frontend/dist`,
+which contains the generated `index.html` and assets. Do not publish the repository
+root or the unbuilt `frontend` directory.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. In repository **Settings → Pages**, select **GitHub Actions** as the source.
+2. In **Settings → Secrets and variables → Actions → Variables**, set
+   `VITE_API_BASE_URL` to the hosted HTTPS backend URL including `/api`.
+   GitHub Pages hosts only the frontend; it cannot run the Express backend.
+3. Configure the backend's `FRONTEND_URL` to match the Pages origin, for example
+   `https://kirsten-23.github.io` (without the repository path).
+4. Push the reviewed changes to `main`, or run the Pages workflow manually.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The workflow uses the repository name for the asset base path and hash routing
+for Pages: `/arms-dashboard/#/comparison` and `/arms-dashboard/#/trends`.
+Local development retains normal browser routing. The workflow refuses to publish
+without a hosted API URL so the deployed application does not call localhost.
