@@ -1,29 +1,29 @@
 import { NavLink } from "react-router-dom";
-import { Home, Scale, TrendingUp } from "lucide-react";
+import home from "../../assets/navigation/home.svg";
+import homeActive from "../../assets/navigation/home-active.svg";
+import comparison from "../../assets/navigation/comparison.svg";
+import comparisonActive from "../../assets/navigation/comparison-active.svg";
+import trends from "../../assets/navigation/trends.svg";
+import trendsActive from "../../assets/navigation/trends-active.svg";
 
-function Sidebar() {
+const links = [
+  { to: "/", label: "Overview", icon: home, activeIcon: homeActive },
+  { to: "/comparison", label: "Comparison", icon: comparison, activeIcon: comparisonActive },
+  { to: "/trends", label: "Trends", icon: trends, activeIcon: trendsActive },
+];
+
+function Sidebar({ onNavigate }) {
   return (
     <aside className="sidebar">
-      <div className="sidebar-brand">
-        <h1>ARM</h1>
-        <span>Let's grow.</span>
-      </div>
-
-      <nav className="sidebar-nav">
-        <NavLink to="/" end className="sidebar-link">
-          <Home size={22} />
-          <span>Overview</span>
-        </NavLink>
-
-        <NavLink to="/comparison" className="sidebar-link">
-          <Scale size={22} />
-          <span>Comparison</span>
-        </NavLink>
-
-        <NavLink to="/trends" className="sidebar-link">
-          <TrendingUp size={22} />
-          <span>Trends</span>
-        </NavLink>
+      <nav className="sidebar-nav" aria-label="Main navigation">
+        {links.map((link) => <NavLink
+          key={link.to} to={link.to} end={link.to === "/"}
+          onClick={onNavigate} className="sidebar-link" aria-label={link.label} title={link.label}
+        >
+          <img className="sidebar-icon sidebar-icon--default" src={link.icon} alt="" />
+          <img className="sidebar-icon sidebar-icon--active" src={link.activeIcon} alt="" />
+          <span>{link.label}</span>
+        </NavLink>)}
       </nav>
     </aside>
   );

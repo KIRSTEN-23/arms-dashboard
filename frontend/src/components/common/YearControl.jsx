@@ -37,6 +37,7 @@ function YearControl({
   return (
     <select
       className="year-control"
+      aria-label="Year"
       value={year}
       onChange={(event) => onChange({ year: Number(event.target.value) })}
     >
