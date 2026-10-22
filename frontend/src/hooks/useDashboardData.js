@@ -6,7 +6,9 @@ import {
 } from "../utils/normaliseSurveyData";
 import {
   FARM_BUSINESS_METRICS,
-  OVERVIEW_METRICS,
+  FARM_BUSINESS_REPORTS,
+  PAGE_KEYS,
+  REPORT_KEYS,
 } from "../data/farmBusinessMetrics";
 import { formatMetricValue } from "../utils/formatMetricValue";
 
@@ -27,16 +29,15 @@ function useDashboardData() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    let active = true;
     async function fetchDashboardData() {
       try {
         setLoading(true);
         setError("");
 
-        const overviewMetricObjects = OVERVIEW_METRICS
-          .map((metricId) =>
-            FARM_BUSINESS_METRICS.find((metric) => metric.id === metricId)
-          )
-          .filter(Boolean);
+        const overviewMetricObjects = FARM_BUSINESS_METRICS.filter(
+          (metric) => metric.pages.includes(PAGE_KEYS.OVERVIEW)
+        );
 
         const responses = await Promise.all(
           overviewMetricObjects.map((metric) =>
@@ -47,6 +48,8 @@ function useDashboardData() {
             })
           )
         );
+
+        if (!active) return;
 
         const metricResults = overviewMetricObjects.map((metric, index) => {
           const normalised = normaliseSurveyData(responses[index]);
@@ -59,108 +62,40 @@ function useDashboardData() {
           };
         });
 
-        const getMetricById = (id) =>
-          metricResults.find((metric) => metric.id === id);
+        setSummaryMetrics(metricResults
+          .filter((metric) => ["summary", "both"].includes(metric.overviewRole))
+          .map((metric) => ({
+            id: metric.id,
+            label: metric.label,
+            value: metric.formattedValue,
+            helper: FARM_BUSINESS_REPORTS.find((report) => report.key === metric.reportKey)?.label,
+          })));
 
-        setSummaryMetrics([
-          {
-            id: "igcfi",
-            label: "Gross cash farm income",
-            value: getMetricById("igcfi")?.formattedValue || "N/A",
-            helper: "Income statement",
-          },
-          {
-            id: "etot",
-            label: "Total cash expenses",
-            value: getMetricById("etot")?.formattedValue || "N/A",
-            helper: "Income statement",
-          },
-          {
-            id: "infi",
-            label: "Net farm income",
-            value: getMetricById("infi")?.formattedValue || "N/A",
-            helper: "Income statement",
-          },
-          {
-            id: "atot",
-            label: "Farm assets",
-            value: getMetricById("atot")?.formattedValue || "N/A",
-            helper: "Balance sheet",
-          },
-        ]);
+        const breakdownFor = (reportKey) => metricResults
+          .filter((metric) => metric.reportKey === reportKey &&
+            ["breakdown", "both"].includes(metric.overviewRole))
+          .map((metric) => ({
+            id: metric.id,
+            label: metric.overviewLabel || metric.label,
+            value: metric.formattedValue,
+            unitLabel: metric.unitLabel,
+          }));
 
-        setIncomeItems([
-          {
-            id: "revenue",
-            label: "Revenue",
-            value: getMetricById("igcfi")?.formattedValue || "N/A",
-            note: "Gross cash farm income",
-          },
-          {
-            id: "expenses",
-            label: "Expenses",
-            value: getMetricById("etot")?.formattedValue || "N/A",
-            note: "Total cash expenses",
-          },
-          {
-            id: "net-income",
-            label: "Net income",
-            value: getMetricById("infi")?.formattedValue || "N/A",
-            note: "Net farm income",
-          },
-        ]);
-
-        setBalanceItems([
-          {
-            id: "assets",
-            label: "Assets",
-            value: getMetricById("atot")?.formattedValue || "N/A",
-            note: "Total farm assets",
-          },
-          {
-            id: "liabilities",
-            label: "Liabilities",
-            value: getMetricById("dtot")?.formattedValue || "N/A",
-            note: "Farm liabilities",
-          },
-          {
-            id: "equity",
-            label: "Equity",
-            value: getMetricById("netw")?.formattedValue || "N/A",
-            note: "Farm equity",
-          },
-        ]);
-
-        setHealthItems([
-          {
-            id: "frdanum",
-            label: "Debt-to-Asset Ratio",
-            value: getMetricById("frdanum")?.formattedValue || "N/A",
-            helper: "Financial risk",
-          },
-          {
-            id: "frwcnum",
-            label: "Working Capital-to-Expense Ratio",
-            value: getMetricById("frwcnum")?.formattedValue || "N/A",
-            helper: "Financial resilience",
-          },
-          {
-            id: "frcrnum",
-            label: "Current Ratio",
-            value: getMetricById("frcrnum")?.formattedValue || "N/A",
-            helper: "Liquidity",
-          },
-        ]);
+        setIncomeItems(breakdownFor(REPORT_KEYS.INCOME_STATEMENT));
+        setBalanceItems(breakdownFor(REPORT_KEYS.BALANCE_SHEET));
+        setHealthItems(breakdownFor(REPORT_KEYS.FINANCIAL_RATIOS));
       } catch (err) {
+        if (!active) return;
         console.error(err);
-        setError("Unable to load dashboard data.");
+        setError(err.message || "Unable to load dashboard data.");
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     }
 
     fetchDashboardData();
-  }, [filters]);
+    return () => { active = false; };
+  }, [filters.year, filters.state]);
 
   return {
     filters,

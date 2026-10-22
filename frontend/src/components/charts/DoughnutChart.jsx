@@ -6,6 +6,8 @@ import {
   Legend,
 } from "chart.js";
 
+import { doughnutChartOptions } from "../../data/chartOptions";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function DoughnutChart({ title, data }) {
@@ -13,7 +15,7 @@ function DoughnutChart({ title, data }) {
     <section className="chart-card">
       <h3>{title}</h3>
       <div className="chart-card__canvas">
-        <Doughnut data={data} />
+        <Doughnut data={data} options={doughnutChartOptions} />
       </div>
     </section>
   );

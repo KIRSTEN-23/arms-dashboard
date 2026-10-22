@@ -2,6 +2,7 @@ import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   LineElement,
+  Filler,
   PointElement,
   CategoryScale,
   LinearScale,
@@ -10,7 +11,7 @@ import {
 } from "chart.js";
 import { timelineChartOptions } from "../../data/chartOptions";
 
-ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend);
+ChartJS.register(Filler, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 function LineChart({ title, data }) {
   return (

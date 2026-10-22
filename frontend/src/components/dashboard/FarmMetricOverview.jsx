@@ -12,7 +12,6 @@ function FarmMetricOverview({ title, items = [] }) {
               <p>{item.label}</p>
               <strong>{item.value}</strong>
             </div>
-            <span>{item.note}</span>
           </div>
         ))}
       </div>

@@ -1,105 +1,123 @@
-
-import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 import EmptyState from "../components/common/EmptyState";
+import PageLoader from "../components/common/PageLoader";
+import YearControl from "../components/common/YearControl";
+import headerChevron from "../assets/navigation/header-chevron.svg";
 import PageHeader from "../components/common/PageHeader";
-import PageControls from "../components/common/PageControls";
 
-import FilterPanel from "../components/FilterPanel";
-
+import ComparisonFilterToolbar from "../components/comparison/ComparisonFilterToolbar";
 import ComparisonCharts from "../components/comparison/ComparisonCharts";
 import ComparisonTable from "../components/comparison/ComparisonTable";
 
 import useComparisonData from "../hooks/useComparisonData";
 
 import useArmsMetadata from "../hooks/useArmsMetadata";
-import { FARM_BUSINESS_METRICS, FARM_BUSINESS_REPORTS } from "../data/farmBusinessMetrics";
-
-const FILTER_CATEGORIES = [
-  { id: "ftyppll", name: "Collapsed Farm Typology" },
-  { id: "sal", name: "Economic Class" },
-  { id: "age", name: "Operator Age" },
-  { id: "reg", name: "Farm Resource Region" },
-  { id: "n5reg", name: "NASS Region" },
-  { id: "spec", name: "Production Specialty" },
-];
+import { FARM_BUSINESS_METRICS, FARM_BUSINESS_REPORTS, PAGE_KEYS, DEFAULT_COMPARISON_FILTERS, COMPARISON_GROUPS, MIN_COMPARISON_OBJECTS } from "../data/farmBusinessMetrics";
 
 function ComparisonPage() {
-  const [activeDomain, setActiveDomain] = useState("business");
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const { activeDomain } = useOutletContext();
+  const { years, loading: metadataLoading, error: metadataError } = useArmsMetadata();
 
-  const { years } = useArmsMetadata();
+  const { filters, setFilters, chartData, tableData, availableObjects, visibleObjects, loading, error } = useComparisonData();
 
-  const { filters, setFilters, chartData, tableData, loading, error } = useComparisonData();
+  const contentLoading = loading || metadataLoading;
+  const contentError = error || metadataError;
+
+  const pageMetrics = FARM_BUSINESS_METRICS.filter(
+    (metric) => metric.pages.includes(PAGE_KEYS.COMPARISON)
+  );
+  const activeReports = FARM_BUSINESS_REPORTS.filter(
+    (report) => pageMetrics.some((metric) => metric.reportKey === report.key)
+  );
+  const activeMetrics = pageMetrics.filter(
+    (metric) => metric.reportKey === filters.reportKey
+  );
 
   function updateFilters(nextValues) {
-    setFilters((current) => ({
-      ...current,
-      ...nextValues,
-    }));
+    setFilters((current) => {
+      const next = { ...current, ...nextValues };
+      if (nextValues.reportKey && nextValues.reportKey !== current.reportKey) {
+        const metric = pageMetrics.find((item) => item.reportKey === nextValues.reportKey && item.id === nextValues.variable)
+          || pageMetrics.find((item) => item.reportKey === nextValues.reportKey);
+        if (!metric) return current;
+        Object.assign(next, {
+          variable: metric.id,
+          metricLabel: metric.label,
+          unitType: metric.unitType,
+        });
+      }
+      if (nextValues.comparisonGroupId) {
+        const group = COMPARISON_GROUPS.find((item) => item.id === nextValues.comparisonGroupId);
+        if (!group) return current;
+        next.category = group.apiCategory;
+        next.selectedObjects = [];
+      }
+      if (nextValues.selectedObjects) {
+        const selection = [...new Set(nextValues.selectedObjects)].filter((object) => availableObjects.includes(object));
+        if (selection.length > 0 && selection.length < MIN_COMPARISON_OBJECTS) return current;
+        next.selectedObjects = selection;
+      }
+      return next;
+    });
   }
+
   function clearFilters() {
-      setFilters({
-        year: 2024,
-        state: "all",
-        variable: "igcfi",
-        metricLabel: "Gross Cash Farm Income",
-        reportId: 2,
-        category: "Production Specialty",
-      });
-    }
+    setFilters({ ...DEFAULT_COMPARISON_FILTERS, selectedObjects: [] });
+  }
 
   return (
     <>
-      <PageHeader
+      {!contentLoading && !contentError && <PageHeader
+        overlapTarget=".filter-layout__surface"
+        overlapEnabled={!contentLoading && !contentError}
         title="Farm Data Comparison"
-        description="Compare farm business financial metrics across selected farm categories."
-      />
+        description="Compare a U.S. farm business financial measure across selected farm categories."
+        action={<div className="header-report-select">
+          <YearControl years={years} year={filters.year} onChange={updateFilters} />
+          <img src={headerChevron} alt="" aria-hidden="true" />
+        </div>}
+      />}
 
-      <PageControls
-        activeDomain={activeDomain}
-        onDomainChange={setActiveDomain}
-        years={years}
-        yearVariant="single"
-        year={filters.year}
-        onYearChange={updateFilters}
-        onFilterClick={() => setIsFilterOpen(true)}
-      />
-
-      {activeDomain === "household" ? (
-        <EmptyState 
-        title="Household comparison coming soon" 
-        message="This version compares farm business data. Household comparison is planned for a future release."
-      />
+      {contentLoading ? (
+        <PageLoader message="Loading comparison data…" />
+      ) : contentError ? (
+        <p className="page-status" role="alert">{contentError}</p>
       ) : (
-        <main className="comparison-page">
-          {loading && <p>Loading comparison data...</p>}
-          {error && <p>{error}</p>}
-          
-          {!loading && !error && (
-            <>
-            <ComparisonCharts
-              barData={chartData?.bar}
-              doughnutData={chartData?.doughnut}
-              radarData={chartData?.radar}
+        <div className="comparison-layout">
+          <div className="comparison-layout__content">
+            <ComparisonFilterToolbar
+              reports={activeReports} metrics={activeMetrics} groups={COMPARISON_GROUPS} objects={availableObjects}
+              filters={{ ...filters, selectedObjects: visibleObjects }}
+              onChange={updateFilters} onClear={clearFilters}
             />
-          <ComparisonTable rows={tableData} />
-          </>
-      )}
-        </main>
-      )}
 
-      <FilterPanel
-        isOpen={isFilterOpen}
-        onClose={() => setIsFilterOpen(false)}
-        reports={FARM_BUSINESS_REPORTS}
-        metrics={FARM_BUSINESS_METRICS}
-        categories={FILTER_CATEGORIES}
-        filters={filters}
-        onFilterChange={updateFilters}
-        onClear={clearFilters}
-        onApply={() => setIsFilterOpen(false)}
-      />
+            {activeDomain === "household" ? (
+              <EmptyState
+                title="Household comparison coming soon"
+                message="This version compares farm business data. Household comparison is planned for a future release."
+              />
+            ) : (
+              <main className="comparison-page">
+                {visibleObjects.length < MIN_COMPARISON_OBJECTS ? <EmptyState
+                  title="Not enough objects to compare"
+                  message="This metric has fewer than two available objects. Try another metric, year, or comparison group."
+                /> : <>
+                <ComparisonCharts
+                  rows={tableData}
+                  metrics={chartData?.metrics}
+                  metricLabel={filters.metricLabel}
+                  category={filters.category}
+                  barData={chartData?.bar}
+                />
+                <ComparisonTable rows={tableData} metrics={chartData?.metrics} />
+                </>}
+              </main>
+            )}
+          </div>
+
+        </div>
+      )}
     </>
   );
 }

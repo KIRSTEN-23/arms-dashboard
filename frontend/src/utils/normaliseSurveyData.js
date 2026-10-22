@@ -1,3 +1,9 @@
+function toNullableNumber(value) {
+  if (value == null || String(value).trim() === "") return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
 export function normaliseSurveyData(records = []) {
   if (!Array.isArray(records)) return [];
 
@@ -15,10 +21,10 @@ export function normaliseSurveyData(records = []) {
     variableId: item.variableId,
     variableName: item.variableName,
     unit: item.variableUnit,
-    estimate: Number(item.estimate ?? 0),
-    median: Number(item.median ?? 0),
-    rse: Number(item.rse ?? 0),
-    unreliable: Boolean(item.unreliable_Est),
+    estimate: toNullableNumber(item.estimate),
+    median: toNullableNumber(item.median),
+    rse: toNullableNumber(item.rse),
+    unreliable: [true, 1, "1", "true"].includes(item.unreliable_Est),
   }));
 }
 
@@ -35,22 +41,4 @@ export function getTotalRecord(records = []) {
     ) ||
     records[0]
   );
-}
-
-export function toComparisonChartData(records = []) {
-  return records.map((item) => ({
-    label: item.categoryValue,
-    value: item.estimate,
-    unit: item.unit,
-  }));
-}
-
-export function toTimelineChartData(records = []) {
-  return records
-    .map((item) => ({
-      year: item.year,
-      value: item.estimate,
-      unit: item.unit,
-    }))
-    .sort((a, b) => a.year - b.year);
 }

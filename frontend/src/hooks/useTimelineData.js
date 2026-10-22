@@ -3,27 +3,11 @@ import { getSurveyData } from "../api/armsApi";
 import { normaliseSurveyData, getTotalRecord } from "../utils/normaliseSurveyData";
 import { toTimelineLineChartData } from "../utils/chartTransformers";
 
-const DEFAULT_FILTERS = {
-  startYear: 1996,
-  endYear: 2024,
-  state: "all",
-  variable: "igcfi",
-  metricLabel: "Gross Cash Farm Income",
-};
+import { DEFAULT_TIMELINE_FILTERS } from "../data/farmBusinessMetrics";
+import { formatMetricValue } from "../utils/formatMetricValue";
 
-function formatCurrency(value) {
-  if (!Number.isFinite(value)) return "N/A";
-
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    notation: "compact",
-    maximumFractionDigits: 1,
-  }).format(value);
-}
-
-function useTimelineData() {
-  const [filters, setFilters] = useState(DEFAULT_FILTERS);
+function useTimelineData(availableYears, metadataLoading) {
+  const [filters, setFilters] = useState(() => ({ ...DEFAULT_TIMELINE_FILTERS }));
 
   const [chartData, setChartData] = useState(null);
   const [summary, setSummary] = useState([]);
@@ -31,16 +15,25 @@ function useTimelineData() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  if (!metadataLoading && availableYears.length) {
+    const oldest = Math.min(...availableYears);
+    const newest = Math.max(...availableYears);
+    if (!availableYears.includes(filters.startYear) || !availableYears.includes(filters.endYear)) {
+      setFilters((current) => ({ ...current, startYear: oldest, endYear: newest }));
+    }
+  }
+
   useEffect(() => {
+    let active = true;
+    if (metadataLoading || !availableYears.length) return;
     async function fetchTimelineData() {
       try {
         setLoading(true);
         setError("");
 
-        const years = Array.from(
-          { length: filters.endYear - filters.startYear + 1 },
-          (_, index) => filters.startYear + index
-        ).join(",");
+        const years = availableYears
+          .filter((year) => year >= filters.startYear && year <= filters.endYear)
+          .sort((a, b) => a - b).join(",");
 
         const response = await getSurveyData({
           year: years,
@@ -48,9 +41,13 @@ function useTimelineData() {
           variable: filters.variable,
         });
 
-        const normalised = normaliseSurveyData(response)
-          .map((record) => getTotalRecord([record]) || record)
-          .filter((record) => record.categoryValue === "TOTAL");
+        if (!active) return;
+
+        const records = normaliseSurveyData(response);
+        const normalised = [...new Set(records.map((record) => record.year))]
+          .map((year) => getTotalRecord(records.filter((record) => record.year === year)))
+          .filter(Boolean)
+          .sort((a, b) => a.year - b.year);
 
         setChartData(
           toTimelineLineChartData(normalised, filters.metricLabel)
@@ -82,19 +79,19 @@ function useTimelineData() {
           {
             id: "highest",
             label: "Highest Value",
-            value: formatCurrency(highest),
+            value: formatMetricValue(highest, filters.unitType),
             helper: "Peak year in selected range",
           },
           {
             id: "lowest",
             label: "Lowest Value",
-            value: formatCurrency(lowest),
+            value: formatMetricValue(lowest, filters.unitType),
             helper: "Lowest year in selected range",
           },
           {
             id: "average",
             label: "Average",
-            value: formatCurrency(average),
+            value: formatMetricValue(average, filters.unitType),
             helper: "Mean across selected years",
           },
           {
@@ -105,22 +102,24 @@ function useTimelineData() {
           },
         ]);
       } catch (err) {
+        if (!active) return;
         console.error(err);
-        setError("Unable to load timeline data.");
+        setError(err.message || "Unable to load timeline data.");
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     }
 
     fetchTimelineData();
-  }, [filters]);
+    return () => { active = false; };
+  }, [availableYears, metadataLoading, filters.startYear, filters.endYear, filters.state, filters.variable, filters.metricLabel, filters.unitType]);
 
   return {
     filters,
     setFilters,
     chartData,
     summary,
-    loading,
+    loading: metadataLoading || (availableYears.length > 0 && loading),
     error,
   };
 }

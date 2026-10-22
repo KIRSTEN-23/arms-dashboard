@@ -1,72 +1,36 @@
 import { useEffect, useState } from "react";
-import {
-  getCategories,
-  getFarmTypes,
-  getReports,
-  getStates,
-  getVariables,
-  getYears,
-} from "../api/armsApi";
+import { getYears } from "../api/armsApi";
 
+// Pages use configured reports/metrics and survey-derived comparison objects.
+// Only the available years need a separate metadata request.
 function useArmsMetadata() {
-  const [metadata, setMetadata] = useState({
-    states: [],
-    years: [],
-    farmTypes: [],
-    reports: [],
-    variables: [],
-    categories: [],
-  });
-
+  const [years, setYears] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    let active = true;
     async function fetchMetadata() {
       try {
         setLoading(true);
         setError("");
-
-        const [
-          states,
-          years,
-          farmTypes,
-          reports,
-          variables,
-          categories,
-        ] = await Promise.all([
-          getStates(),
-          getYears(),
-          getFarmTypes(),
-          getReports(),
-          getVariables(),
-          getCategories(),
-        ]);
-
-        setMetadata({
-          states,
-          years,
-          farmTypes,
-          reports,
-          variables,
-          categories,
-        });
+        const availableYears = await getYears();
+        const recentYears = [...new Set(availableYears.map(Number).filter(Number.isFinite))]
+          .sort((a, b) => b - a).slice(0, 10);
+        if (active) setYears(recentYears);
       } catch (err) {
+        if (!active) return;
         console.error(err);
-        setError("Unable to load ARMS metadata.");
+        setError(err.message || "Unable to load available ARMS years.");
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     }
-
     fetchMetadata();
+    return () => { active = false; };
   }, []);
 
-  return {
-    ...metadata,
-    loading,
-    error,
-  };
+  return { years, loading, error };
 }
 
 export default useArmsMetadata;
